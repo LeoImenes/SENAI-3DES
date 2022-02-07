@@ -1,0 +1,182 @@
+@import url('../Global/styles.css');
+body {
+    width: 100vw;
+    height: 100vh;
+    justify-content: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+header {
+    width: 100vw;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+    background-color: rgba(145, 145, 145, 0.2)
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center
+}
+
+.dados {
+    width: 100%;
+    height: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#imgUser {
+    border-radius: 50%;
+    align-self: end;
+    position: relative;
+    bottom: 0.25rem
+}
+
+.emailpsd {
+    width: 25%;
+    display: flex;
+    flex-direction: column
+}
+
+.files {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.inputs {
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid black;
+    margin: 0% 10% 0% 10%;
+    padding: 2.5% 0 2.5% 0;
+    border-radius: 10px;
+}
+
+.datas-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly
+}
+
+.alertas {
+    width: 23vw;
+    height: 3rem;
+    border: 1px solid gray;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+    transition: all .2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.show {
+    height: 18rem;
+}
+
+.title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.seta {
+    transition: all .2s;
+}
+
+.up {
+    transform: rotate(180deg);
+}
+
+.containertable {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 14.5rem;
+    overflow: scroll;
+    margin-top: .5rem;
+}
+
+thead {
+    background-color: lightgray;
+    color: black
+}
+
+tbody>tr {
+    background-color: whitesmoke;
+    text-align: center;
+}
+
+tbody>tr>td {
+    border: 1px solid black;
+}
+
+.xis2 {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    cursor: pointer;
+}
+
+.config {
+    width: 100%;
+    height: 25%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.config:hover {
+    box-shadow: 0px 1px 0px 2px black;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    background-color: whitesmoke;
+}
+
+.sair {
+    width: 100%;
+    height: 25%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sair:hover {
+    box-shadow: 0px 1px 0px 2px black;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    background-color: whitesmoke;
+}
+
+.containercheck {
+    height: 14.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: rgb(255, 255, 255);
+    margin-top: 1rem;
+}

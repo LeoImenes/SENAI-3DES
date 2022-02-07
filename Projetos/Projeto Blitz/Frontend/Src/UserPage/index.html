@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Config</title>
+    <script src="../Global/checklogin.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body onload="load()">
+    <header>
+        <img src="../Assets/Icons/cardapio.png" alt="Menu" onclick="showMenu()" class="menu-img" />
+        <div class="logos">
+            <h2>iFoge</h2>
+            <img src="../Assets/images/logo.png" alt="Logo" id="logo" />
+        </div>
+    </header>
+    <div class="menu">
+        <span onclick="closeMenu()" class="xis2">X</span>
+        <ul>
+            <li class="config" onclick="gotoMap()">Map</li>
+            <li class="sair" onclick=" Sair()">Sair</li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="dados">
+
+            <div class="inputs">
+                <img src="" alt="" id="imgUser" width="128" />
+                <div class="emailpsd">
+                    <input type="text" id="emailUser" />
+                    <input type="password" id="pswUser" placeholder="Nova senha" />
+                    <div class="files">
+                        <input type="file" id="foto" hidden />
+                        <img src="../assets/Icons/camera.png" alt="Camera" id="camera" width="32" />
+                        <button onclick="atualizarDados()">Atualizar</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="datas-div">
+            <div class="alertas">
+                <div class="title">
+                    <h2>Alertas Ativos</h2>
+                    <img src="../Assets/Icons/down-arrow.png" onclick="mostrarMeusAlertas(this)" class="seta" alt="Seta" />
+                </div>
+                <div class="containercheck" id="alerts"></div>
+                <button onclick="salvaralertasAtivos()">Salvar</button>
+            </div>
+            <div class="alertas">
+                <div class="title">
+                    <h2>Meus Alertas</h2>
+                    <img src="../Assets/Icons/down-arrow.png" onclick="mostrarMeusAlertas(this)" class="seta" alt="Seta" />
+                </div>
+
+                <div class="containertable" id="alerts">
+                    <table id="show">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Coordenada</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="../Global/md5.js"></script>
+<script src="./script.js"></script>
+
+</html>

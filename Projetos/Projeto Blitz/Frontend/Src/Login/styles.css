@@ -1,0 +1,100 @@
+@import url('../global/styles.css');
+body {
+    width: 100vw;
+    height: 100vh;
+    background: url('../Assets/images/map.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 40vw;
+    height: 80vh;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.376);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+    backdrop-filter: url(../Assets/images/map.jpg) blur(0.5rem) brightness(90%);
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header img {
+    margin-top: 2vh;
+}
+
+header h2 {
+    margin-top: 2vh
+}
+
+header {
+    width: 30vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.form-senha img {
+    width: 20px;
+}
+
+.form-email img {
+    width: 20px;
+    height: 20px;
+}
+
+.form-email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: .12rem solid black;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+}
+
+.form-senha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: .12rem solid black;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    height: 20vh;
+    justify-content: space-around;
+}
+
+a {
+    margin-top: 5px;
+    align-self: end;
+}
+
+.avatar {
+    display: flex;
+    align-self: center;
+}

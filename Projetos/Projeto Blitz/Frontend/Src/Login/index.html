@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <img src="../assets/images/logo.png" alt="Logo" class="logo">
+            <h2>iFoge</h2>
+        </header>
+        <main>
+            <img src="../assets/Images/user.png" alt="Avatar" class="avatar">
+            <form>
+                <div class="inputs">
+                    <div class="form-email" onmouseenter="styleemail()">
+                        <img src="../Assets/Icons/email.png" alt="" class="imgemail">
+                        <input type="text" placeholder="Informe seu e-mail" id="email">
+                    </div>
+                    <div class="form-senha">
+                        <img src="../Assets/Icons/senha.png" alt="" class="imgsenha">
+                        <input type="password" placeholder="Informe sua senha" id="senha">
+                    </div>
+                </div>
+                <input type="file" id="foto" hidden>
+                <img src="../assets/Icons/camera.png" alt="Camera" id="camera" width="32" hidden>
+                <a onclick="cadastrar()">Cadastrar-se</a>
+                <button type="button" id="login" onclick="conectar()">Login</button>
+            </form>
+        </main>
+    </div>
+</body>
+<script src="../global/md5.js"></script>
+<script src="./script.js"></script>
+
+</html>
