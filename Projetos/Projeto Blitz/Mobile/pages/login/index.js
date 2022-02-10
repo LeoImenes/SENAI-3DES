@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, ToastAndroid, TouchableOpacity, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import md5 from 'md5';
 import * as ImagePicker from 'expo-image-picker'
+import css from "./style"
 
 export default function Login({ navigation }) {
 
@@ -11,6 +12,12 @@ export default function Login({ navigation }) {
     const [cadastrando, setCadastrando] = useState(false);
 
     const [imagem, setImagem] = useState(require('../../assets/App/images/user.png'));
+
+    useEffect(async ()=>{
+        if(await AsyncStorage.getItem('userdata') !== null){
+            navigation.navigate('Main')
+        }
+    })
 
     const autenticar = () => {
         let usuario = {
@@ -65,6 +72,7 @@ export default function Login({ navigation }) {
             foto: (imagem.uri !== undefined) ? imagem.uri : ''
 
         }
+
         fetch("http://10.87.207.20:3000/usuario",{
             method: 'POST',
             headers: {
@@ -86,10 +94,10 @@ export default function Login({ navigation }) {
 
 
     return (
-        <View>
+        <View style={css.body}>
             <Image source={imagem} style={{ width: 128, height: 128 }} />
-            <TextInput value={email} onChangeText={setEmail} style={{ backgroundColor: 'lightblue' }} />
-            <TextInput value={senha} onChangeText={setSenha} style={{ backgroundColor: 'lightblue' }} />
+            <TextInput value={email} onChangeText={setEmail} style={{ backgroundColor: 'lightblue',  width: 128, height:"5%", marginBottom:10}} />
+            <TextInput value={senha} onChangeText={setSenha} style={{ backgroundColor: 'lightblue',  width: 128, height:"5%",marginBottom:10}} />
 
             {
 
