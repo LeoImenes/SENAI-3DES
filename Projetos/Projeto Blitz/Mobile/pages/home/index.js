@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Dimensions, StyleSheet, ToastAndroid, Image } from 'react-native';
+import { View, Text, Dimensions, StyleSheet, ToastAndroid, Image, Modal, TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { Marker } from 'react-native-maps';
 
 import * as Location from 'expo-location';
@@ -22,30 +23,33 @@ export default function Home() {
         longitude: -122.4324,
     })
     const [marcadores, setMarcadores] = useState([])
-    
+    const [showModal, setModal] = useState(false)
+    const [valuePicker, setValuePicker] = useState()
+    const [coorAlerta, setcoordAlerta] = useState("")
+
 
     useEffect(async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
 
         if (status !== 'granted') {
             ToastAndroid.show('Localização negada', ToastAndroid.SHORT);
-        }else {
-            let location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.BestForNavigation});
+        } else {
+            let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.BestForNavigation });
 
             console.log(location);
             setCoord({
-                latitude:location.coords.latitude,
-                longitude:location.coords.longitude
-                
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude
+
             });
-        
+
             let posi = {
                 coordenadas: location.coords.latitude + ',' + location.coords.longitude,
-                alertum:{
-                    tipo :"email",
-                    descricao : "Minha localização"
+                alertum: {
+                    tipo: "email",
+                    descricao: "Minha localização"
                 },
-               imagem: require(`../../assets/App/Icons/loca.png`)
+                imagem: require(`../../assets/App/Icons/loca.png`)
             }
             let arr = [];
             arr.push(posi)
@@ -54,20 +58,34 @@ export default function Home() {
         }
     }, []);
 
-    const carregarAlertas = () =>{
+    const carregarAlertas = () => {
         fetch("http://10.87.207.20:3000/local")
-        .then(res => {return res.json()})
-        .then(data => {
-            let tempArr = marcadores;
-            data.forEach(item => {
-                item.image = tipo[item.alertum.id - 1]
-                tempArr.push(item)
+            .then(res => { return res.json() })
+            .then(data => {
+                let tempArr = marcadores;
+                data.forEach(item => {
+                    item.image = tipo[item.alertum.id - 1]
+                    tempArr.push(item)
+                })
+                setMarcadores(tempArr)
             })
-            setMarcadores(tempArr)
-        })
     }
+const cadastrarAlerta = ()=>{
+    console.log(valuePicker)
+}
 
+const sebastiao = (e) =>{
     
+    console.log(e.nativeEvent.coordinate.latitude)
+    console.log(e.nativeEvent.coordinate.longitude)
+
+    let coord = e.nativeEvent.coordinate.latitude + "," + e.nativeEvent.coordinate.longitude
+
+    setcoordAlerta(coord)
+
+    setshowModal(true)
+}
+
 
     // useEffect(() => {
     //     fetch("http://10.87.207.20:3000/local")
@@ -79,22 +97,23 @@ export default function Home() {
     //     })
     // }, [marcadores])
 
- return(
+    return (
         <View style={styles.container}>
-            <MapView 
-            style={styles.map} 
-            region={{
-                ...coord,
-                latitudeDelta: 0.0065,
-                longitudeDelta: 0.00065,
-            }}>
+            <MapView
+                style={styles.map}
+                region={{
+                    ...coord,
+                    latitudeDelta: 0.0065,
+                    longitudeDelta: 0.00065,
+                }}  onPress={sebastiao}>
+                   
                 {
-                    
+
                     marcadores.map((marcador, index) => {
                         // console.log(marcador)
                         let loc = marcador.coordenadas.split(',');
 
-                        return(
+                        return (
                             <Marker
                                 key={index}
                                 coordinate={{
@@ -108,27 +127,36 @@ export default function Home() {
                             </Marker>
                         )
                     })
-                }                
+                }
             </MapView>
+            <Modal visible={showModal}>
+                <Picker selectedValue={valuePicker} onValueChange={(itemValue, itemIndex) => setSelectedLanguage(itemValue)}>
+                    <Picker.Item label="Java" value="java" />
+                    <Picker.Item label="JavaScript" value="js" />
+                </Picker>
+                <TouchableOpacity onPress={() => cadastrarAlerta()}>
+                    <Text>Cadastrar alerta </Text>
+                </TouchableOpacity>
+            </Modal>
         </View>
     )
-                
-        
+
+
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     map: {
-      width: Dimensions.get('window').width,
-      height: Dimensions.get('window').height,
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
     },
-    marcador:{
-        width:32, 
-        height:32
+    marcador: {
+        width: 32,
+        height: 32
     }
 });
