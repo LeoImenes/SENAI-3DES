@@ -27,12 +27,13 @@ body {
 
 input[type="text"],
 input[type="password"] {
-    padding: var(--padding-default);
+    padding: 10px;
     border-radius: 10px;
     outline: none;
-    margin-top: 5px;
+    margin-top: 1vh;
     background-color: transparent;
     text-align: center;
+    border: none;
 }
 
 button {

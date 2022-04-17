@@ -30,6 +30,17 @@ function styleemail() {
     });
 }
 
+// function stylesenha() {
+//     formsenha.addEventListener("onmouseenter", () => {
+//         if (imgsenha.hidden == false) {
+//             imgsenha.hidden = true;
+//             formsenha.style.border = "1px solid black"
+//         } else {
+//             formsenha.style.backgroundColor = "red"
+//         }
+//     })
+// }
+
 camera.addEventListener("click", () => {
     foto.click();
 });

@@ -73,7 +73,7 @@ export default function Login({ navigation }) {
 
         }
 
-        fetch("http://10.87.207.20:3000/usuario",{
+        fetch("http://10.20.101.218:3000/usuario",{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Dimensions, StyleSheet, ToastAndroid, Image, Modal, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Marker } from 'react-native-maps';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as Location from 'expo-location';
 
@@ -23,9 +24,10 @@ export default function Home() {
         longitude: -122.4324,
     })
     const [marcadores, setMarcadores] = useState([])
-    const [showModal, setModal] = useState(false)
+    const [showModal, setshowModal] = useState(false)
     const [valuePicker, setValuePicker] = useState()
-    const [coorAlerta, setcoordAlerta] = useState("")
+    const [coordAlerta, setcoordAlerta] = useState("")
+    const[alertas, setAlertas] = useState([])
 
 
     useEffect(async () => {
@@ -55,8 +57,17 @@ export default function Home() {
             arr.push(posi)
             setMarcadores(arr);
             carregarAlertas();
+            listarAlertas();
         }
     }, []);
+
+    const listarAlertas = () => {
+        fetch("http://10.87.207.20:3000/alerta")
+        .then(response => { return response.json() })
+        .then(data => {
+            setAlertas(data);
+        })
+    }
 
     const carregarAlertas = () => {
         fetch("http://10.87.207.20:3000/local")
@@ -70,8 +81,25 @@ export default function Home() {
                 setMarcadores(tempArr)
             })
     }
-const cadastrarAlerta = ()=>{
-    console.log(valuePicker)
+const cadastrarAlerta = async()=>{
+    let idUser = await AsyncStorage.getItem('userdata')
+    let data = {
+        coordenadas: coordAlerta,
+        id_user : idUser,
+        id_alerta : valuePicker,
+        ativo:true,
+    }
+    fetch("http://10.87.207.20:3000/local",{
+        method : 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => { return response.json() })
+    .then(data => {
+        setshowModal(false);
+    })
 }
 
 const sebastiao = (e) =>{
@@ -130,9 +158,14 @@ const sebastiao = (e) =>{
                 }
             </MapView>
             <Modal visible={showModal}>
-                <Picker selectedValue={valuePicker} onValueChange={(itemValue, itemIndex) => setSelectedLanguage(itemValue)}>
-                    <Picker.Item label="Java" value="java" />
-                    <Picker.Item label="JavaScript" value="js" />
+                <Picker selectedValue={valuePicker} onValueChange={(itemValue, itemIndex) => setValuePicker(itemValue)}>
+                    { 
+                        alertas.map((alerta, index) =>{
+                            return (
+                                <Picker.Item label={alerta.tipo} value={alerta.id} key={index} />
+                            )
+                        })
+                    }
                 </Picker>
                 <TouchableOpacity onPress={() => cadastrarAlerta()}>
                     <Text>Cadastrar alerta </Text>

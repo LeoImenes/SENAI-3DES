@@ -23,7 +23,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: center
+    align-items: center;
 }
 
 .dados {
@@ -75,7 +75,7 @@ header {
 }
 
 .alertas {
-    width: 23vw;
+    width: 25vw;
     height: 3rem;
     border: 1px solid gray;
     border-radius: 10px;
