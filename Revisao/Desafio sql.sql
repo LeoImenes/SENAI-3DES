@@ -2234,7 +2234,7 @@ AS
 		p.cliente_id,
 		p.data,
 		p.hora,
-		p.valor,
+		sum(p.valor) as valor,
 		pz.pizza_id,
 		pz.nome as pizza,
 		c.nome as nome 
@@ -2243,8 +2243,13 @@ AS
 		inner join Itens_Pedido i on p.pedido_id = i.pedido_id
 		inner join CLientes c on p.cliente_id = c.cliente_id
 		inner join pizzas pz on pz.pizza_id = i.pizza_id
+		group by p.cliente_id
+		order by p.pedido_id desc 
+		
 SELECT
 	*
 FROM
 	vw_pedidos;
-	
+
+---Desafio nivel 3
+
